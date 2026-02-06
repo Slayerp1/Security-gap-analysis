@@ -1,0 +1,66 @@
+# Windows vs Linux — Gap Analysis Comparison
+
+---
+
+## Main Tool
+
+**Windows:** Microsoft Policy Analyzer
+
+**Linux:** OpenSCAP (oscap command + SCAP Workbench GUI)
+
+---
+
+## Baseline Source
+
+**Windows:** Microsoft Security Compliance Toolkit
+
+**Linux:** SCAP Security Guide profiles (CIS, STIG, etc.)
+
+---
+
+## How to Compare
+
+**Windows:** Compare to Effective State (yellow highlights show gaps)
+
+**Linux:** `oscap eval` → HTML report (PASS/FAIL)
+
+---
+
+## Output Format
+
+**Windows:** Side-by-side table in the tool
+
+**Linux:** Detailed HTML report with rationale and remediation
+
+---
+
+## Remediation
+
+**Windows:** Manual via Group Policy / LGPO.exe
+
+**Linux:** Auto-generated Bash / Ansible scripts
+
+---
+
+## Best For
+
+**Windows:** Windows servers and desktops
+
+**Linux:** Enterprise Linux (RHEL, Ubuntu, Rocky, etc.)
+
+---
+
+## When to Use Which
+
+Use **Policy Analyzer** when:
+- You're auditing Windows Server or Windows 10/11
+- You need to compare against Microsoft's own baselines
+- You want a GUI-based side-by-side comparison
+- You're working in a Windows-only environment
+
+Use **OpenSCAP** when:
+- You're auditing Linux servers
+- You need automated remediation scripts
+- You're targeting CIS/STIG/NIST compliance
+- You want detailed HTML reports with fix instructions
+- You need to integrate with Ansible for automation

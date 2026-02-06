@@ -1,0 +1,98 @@
+# Windows — Policy Analyzer
+
+---
+
+## Tool
+
+**Microsoft Policy Analyzer** (part of the free Microsoft Security Compliance Toolkit — SCT)
+
+---
+
+## Download
+
+```
+https://www.microsoft.com/en-us/download/details.aspx?id=55319
+```
+When to download: Before your first Windows gap analysis.
+
+---
+
+## Step-by-Step Process
+
+**Step 1 — Download and extract SCT:**
+```
+Download SCT → Extract PolicyAnalyzer.zip and the baseline ZIP
+Example baseline: Windows Server 2019 v1809
+```
+What it does: Gives you the tool and the recommended settings for your OS version.
+When to do this: Match the baseline to your exact OS version and build.
+
+---
+
+**Step 2 — Run PolicyAnalyzer.exe:**
+```
+Run PolicyAnalyzer.exe as Administrator
+```
+What it does: Opens the comparison tool that reads your live system settings.
+When to do this: On the system you want to audit.
+
+---
+
+**Step 3 — Load the baseline:**
+```
+Load the baseline folder (usually the Documentation subfolder with .policyrules files)
+```
+What it does: Loads Microsoft's recommended security settings.
+
+---
+
+**Step 4 — View recommended settings:**
+```
+Click "View / Compare" → See all recommended baseline settings
+```
+What it does: Shows you what Microsoft recommends for your OS.
+
+---
+
+**Step 5 — Compare to your live system:**
+```
+Click "Compare to Effective State" → Side-by-side view
+```
+What it does: Shows Baseline (recommended) vs Current (real) values side by side.
+What to look for: **Yellow highlights = gaps / non-compliance**
+
+---
+
+**Step 6 — Review important gaps:**
+```
+LockoutBadCount: Baseline = 10 → Effective = 0 (very insecure)
+MinimumPasswordLength: Baseline = 14 → Effective = 7 (weak passwords)
+```
+What it means: Your system doesn't match the recommended security settings.
+
+---
+
+**Step 7 — Fix the gaps:**
+```
+Export the comparison table → Remediate using:
+- Group Policy Editor (gpedit.msc)
+- LGPO.exe (included in SCT)
+```
+When to do this: After reviewing which gaps are relevant to your environment.
+
+---
+
+## Other Windows Tools
+
+- **CIS-CAT** — for CIS benchmark compliance
+- **Microsoft Defender for Cloud** — for cloud security baselines
+
+---
+
+## When to Use Policy Analyzer
+
+- Auditing Windows Server security settings
+- Preparing for compliance audits
+- Hardening new server deployments
+- Verifying Group Policy is applied correctly
+- Comparing settings across multiple servers

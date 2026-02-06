@@ -1,0 +1,81 @@
+# Core Concept — What Is Gap Analysis?
+
+---
+
+## Definition
+
+Gap analysis (also called hardening audit or compliance check) compares your system's current settings against recommended security baselines.
+
+---
+
+## How It Works
+
+**Step 1 — Get the recommended baseline:**
+```
+Download official baselines from Microsoft SCT, CIS, STIG, or NIST
+```
+What it does: Gives you the "ideal" secure configuration for your OS.
+When to do this: Before any compliance audit or system hardening.
+
+---
+
+**Step 2 — Scan your live system:**
+```
+Use a tool to read your system's actual configuration
+```
+What it does: Captures what your system really has right now.
+
+---
+
+**Step 3 — Compare them side by side:**
+```
+Baseline (recommended) vs Effective (actual)
+Differences = security gaps
+```
+What it shows: Weak passwords, missing lockouts, insecure services, wrong settings.
+
+---
+
+**Step 4 — Fix the gaps:**
+```
+Apply recommended settings via Group Policy, scripts, or manual changes
+```
+When to do this: After reviewing which gaps apply to your environment.
+
+---
+
+**Step 5 — Re-scan to confirm:**
+```
+Run the same scan again to verify fixes are applied
+```
+When to do this: Always after making changes — confirms compliance.
+
+---
+
+## Example Gaps You Might Find
+
+**LockoutBadCount:**
+```
+Baseline recommends: 10 (lock after 10 failed attempts)
+Your system has: 0 (never locks out — very insecure)
+```
+Risk: Attackers can brute-force passwords forever.
+
+---
+
+**MinimumPasswordLength:**
+```
+Baseline recommends: 14 characters
+Your system has: 7 characters
+```
+Risk: Short passwords are easy to crack.
+
+---
+
+## When to Use Gap Analysis
+
+- Before deploying a new server to production
+- During regular security audits
+- After OS upgrades or major changes
+- For regulatory compliance (HIPAA, PCI-DSS, SOX, etc.)
+- When hardening systems against known attacks

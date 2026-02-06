@@ -1,0 +1,111 @@
+# Linux — OpenSCAP + SCAP Security Guide
+
+---
+
+## Tool
+
+**OpenSCAP** (oscap command + SCAP Workbench GUI)
+Open-source, free, used by enterprises worldwide.
+
+---
+
+## Installation
+
+**RHEL / Rocky / Fedora / CentOS Stream:**
+```bash
+sudo dnf install openscap-scanner scap-security-guide
+```
+When to use: On Red Hat-based systems.
+
+---
+
+**Ubuntu / Debian:**
+```bash
+sudo apt install libopenscap8 ssg-base ssg-debderived
+```
+When to use: On Debian-based systems.
+
+---
+
+## Step-by-Step Process
+
+**Step 1 — List available profiles/baselines:**
+```bash
+oscap info /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
+```
+What it does: Shows all available security profiles (CIS, STIG, etc.) for your OS.
+When to do this: To see which compliance profiles you can scan against.
+
+---
+
+**Step 2 — Run gap analysis (example using CIS profile):**
+```bash
+oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis \
+    --results /tmp/results.xml --report /tmp/compliance-report.html \
+    /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
+```
+What it does: Scans your system against the CIS baseline and generates a report.
+When to do this: During security audits or before putting a server in production.
+
+---
+
+**Step 3 — Open the report:**
+```bash
+firefox /tmp/compliance-report.html
+```
+What it shows: PASS/FAIL list with detailed explanations, severity, and remediation steps.
+When to check: After every scan to see what needs fixing.
+
+---
+
+**Step 4 — Generate automatic remediation script (optional):**
+```bash
+oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_cis \
+    --output /tmp/remediation.sh /tmp/results.xml
+```
+What it does: Creates a bash script that automatically fixes the failed checks.
+When to do this: When you want to auto-fix gaps instead of doing it manually.
+
+---
+
+**Step 5 — Review and run the fix script:**
+```bash
+cat /tmp/remediation.sh    # Review first!
+sudo bash /tmp/remediation.sh
+```
+What it does: Applies the security fixes to your system.
+When to do this: After reviewing the script — never run blindly in production.
+
+---
+
+**Step 6 — Re-scan to confirm compliance:**
+```bash
+# Run the same oscap eval command from Step 2 again
+```
+When to do this: Always after applying fixes to verify they worked.
+
+---
+
+## GUI Option
+
+```
+Install and use SCAP Workbench for easier scanning and viewing
+```
+When to use: If you prefer a graphical interface over command line.
+
+---
+
+## Other Linux Tools
+
+- **Lynis** (`lynis audit system`) — lightweight security auditing
+- **CIS-CAT** — for CIS benchmark compliance
+
+---
+
+## When to Use OpenSCAP
+
+- Auditing Linux server security settings
+- Generating compliance reports (CIS, STIG, NIST)
+- Automating system hardening
+- Preparing for regulatory audits
+- Continuous compliance monitoring
